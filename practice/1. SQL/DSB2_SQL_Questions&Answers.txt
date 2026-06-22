@@ -1,0 +1,637 @@
+SET @@dataset_project_id = 'bigquery-public-data';
+SET @@dataset_id = 'thelook_ecommerce';
+
+-- select *
+-- from bigquery-public-data.thelook_ecommerce.orders;
+/*
+select *
+from bigquery-public-data.thelook_ecommerce.products;
+*/
+
+-- 2. Show product id, name, cost from products table
+-- select id,name,cost
+-- from products
+
+-- 3. Retrieve the id, first name, and email columns from the users table.
+-- select id, first_name, email 
+-- from users
+
+-- 4. Display the order_id, status, and created_at columns from the orders table. 
+-- select order_id,status,created_at
+-- from orders
+-- limit 20
+
+-- 5. Display the first 100 records from the products table. 
+-- select *
+-- from products
+-- limit 100
+
+-- 6. Retrieve the first 50 events from the events table. 
+-- select *
+-- from events
+-- limit 50
+
+-- 7. Show category column from products table
+-- select distinct category 
+-- from products
+
+
+-- 9. show unique (distinct) category and department from products
+-- select distinct category, department
+-- from products
+-- order by category desc,department desc
+
+-- 11. Find all unique event_type values in the events table. order result descending
+-- select distinct event_type
+-- from events
+-- order by event_type desc
+
+-- 12. Show all unique traffic_source values from the users table. 
+-- select distinct traffic_source
+-- from users
+
+
+-- 13. Display all products ordered by retail_price from highest to lowest. 
+-- select *
+-- from products
+-- order by retail_price desc
+
+-- 14. Show all users ordered by age from youngest to oldest. 
+-- select *
+-- from users
+-- order by age
+
+-- 16. Show product name and retail_price with retail_price renamed as 'price' from the products table. 
+-- select name, retail_price as price
+-- from products
+
+-- 17. Display order_id renamed as 'transaction_id' and created_at renamed as 'order_date' from the orders table. 
+-- select order_id as transaction_id, created_at as order_date
+-- from orders
+
+
+-- 18. Find all users where gender is 'F'. 
+-- select *
+-- from users
+-- where gender="F"
+
+-- 19. Show all products where category is 'Accessories'. 
+-- select *
+-- from products
+-- where category ='Accessories'
+
+-- 20. Find all orders where status is 'Complete'. 
+-- select *
+-- from orders
+-- where status !='Complete'
+
+-- 23. Find all products where retail_price is greater than 100. 
+-- select *
+-- from products
+-- where retail_price > 100
+
+-- 25. how many total number of users in the users table. 
+-- select count(*)
+-- from users
+
+-- 27. How many orders in our orders table
+-- select count(*)
+-- from orders
+
+-- select *
+-- from orders
+
+-- select count(*) - count(returned_at)
+-- from orders
+
+
+-- select count(returned_at)
+-- from orders
+
+-- select distinct status
+-- from orders
+
+-- 29. Count how many orders have status 'Returned' in the orders table. 
+-- select count(*)
+-- from orders
+-- where status='Returned'
+
+-- 30. Calculate the average retail_price for the product category 'Jeans' . 
+-- select round(avg(retail_price),2) as avg_retail_price
+-- from products
+-- where category ='Jeans'
+
+-- 32. Find the sum of all sale_price values in the order_items table. 
+-- select sum(sales_price) as sales
+-- from order_items
+
+-- 33. Find the minimum cost in the inventory_items table. 
+-- select min(cost)
+-- from inventory_items
+
+-- 34. Find the maximum retail_price in the products table. 
+-- select max(retail_price)
+-- from products
+
+
+-- 36. show the products that the retail price are higher than the average retail_price in the products table 
+-- select *
+-- from products
+-- where retail_price > avg(retail_price)
+
+-- select avg(retail_price)
+-- from products
+
+
+-- select *
+-- from products
+-- where retail_price > 59.220163865732225
+
+
+-- 37. Show users where age is greater than 25 AND gender is 'M'. 
+-- select * 
+-- from users 
+-- where age > 25 and gender ='M'
+
+-- 38. Show products where category is 'Jeans' AND retail_price is less than 80. 
+-- select *
+-- from products
+-- where cateogry ='Jeans' and retail_price < 80
+
+-- 39. Find orders where num_of_items is greater than 2 AND status is NOT 'Cancelled'. 
+-- select *
+-- from orders
+-- where num_of_item > 2 and status !='Cancelled'
+
+-- 40. Find products that category is either 'Dresses' or 'Shorts' 
+-- select * 
+-- from products
+-- where category ='Dresses' or category= 'Shorts'
+
+-- 41. Find products that category is either 'Dresses' or 'Shorts', and cost is more than 20
+-- select * 
+-- from products
+-- where (category ='Dresses' or category= 'Shorts') and cost>20
+
+
+-- 42. Show users where country is 'United States' and state is either 'California' or 'New York'. 
+-- select *
+-- from users
+-- where (state='California' or state='New York') and country = 'United States';
+
+
+-- 43. Find products that brand is either 'Modena' or 'Velvet' or 'Tempco'
+-- select *
+-- from products
+-- where brand ='Modena' or brand='Velvet' or brand='Tempco'
+
+-- or using IN:
+-- select *
+-- from products
+-- where brand not in ('Modena','Velvet','Tempco')
+
+
+-- 44. Find events where event_type is either 'cart' OR 'purchase'. 
+-- select *
+-- from events
+-- where event_type in ('cart','purchase')
+
+
+-- 46. Find all products where retail_price is between 50 and 100 including the boundaries 
+-- select *
+-- from products
+-- where retail_price >=50 and retail_price<=100
+
+-- select *
+-- from products
+-- where retail_price between 50 and 100
+
+
+-- 48. Show inventory_items where cost is between 10 and 30 AND product_department is 'Women'.
+-- select *
+-- from inventory_items 
+-- where cost between 10 and 30
+--   and product_department = 'Women'
+
+
+-- 49. Which orders has been done in year 2022
+-- select *
+-- from orders
+-- where created_at between '2022-01-01' and '2023-1-1'
+-- order by created_at desc
+
+
+-- 50. Which orders has been returned in the months jan and feb of year 2022
+-- select *
+-- from orders
+-- where returned_at between '2022-1-1' and '2022-3-1'
+
+
+-- 51. which events where created in 2022 in the city of Tokyo
+-- select *
+-- from events
+-- where city ='Tokyo' and created_at between '2022-1-1' and '2023-1-1'
+
+
+-- 52. which events where created in 2022 in the city of Tokyo, use function Extract
+-- search google to find it.
+-- select *
+-- from events
+-- where city = 'Tokyo' and extract (year from created_at)=2022
+
+
+-- 53. which events where created the half of month (day 15) in 2022 in in the city of Tokyo,
+-- select *
+-- from events
+-- where city = 'Tokyo' 
+--   and extract (day from created_at) = 15
+--   and extract (year from created_at) = 2022
+
+
+-- 54. what were the top ten sale_price in the order items in year 2022?
+-- Show only order_id, product_id, created_at, sale_price
+-- select order_id, product_id, created_at, sale_price
+-- from order_items
+-- where extract (year from created_at) = 2022
+-- order by sale_price desc
+-- limit 10
+
+
+
+-- 55. Show all the users that has the first name 'David'
+-- select *
+-- from users 
+-- where first_name = 'David'
+
+
+-- select *
+-- from users 
+-- where lower(first_name) like 'dav__'
+
+
+-- 57. Which product starts with 'plus' in the name
+-- notice capital and small issue here
+-- select *
+-- from products
+-- where lower(name) like 'plus %'
+
+-- 58. Which product end with 'Jacket' in the name
+-- select *
+-- from products
+-- where lower(name) like '% jacket'
+
+
+-- 59. Which product have word 'Short' in the name
+-- select *
+-- from products
+-- where lower(name) like '%short%'
+
+
+-- 60. show all users whose last name start with 'M' and the third letter is 'r'
+-- select *
+-- from users
+-- where last_name like 'M_r%'
+
+-- 61. show all users whose email starts with 'j', fourth letter is 'm' 
+-- and seventh letter is 'a' in the email and age is greater than 50
+-- select *
+-- from users
+-- where lower(email) like 'j__m__a%'
+--   and age > 50
+
+-- 62. show all products which cost more than 20, category starts with 'access', 
+-- name contains the word 'black' and the sku fifth letter is 'c' 
+-- select *
+-- from products
+-- where cost > 20 
+--   and lower(category) like 'access%'
+--   and lower(name) like '%black%'
+--   and lower(sku) like '____c%'
+
+-- 63. Find all orders where returned_at is null (orders that were not returned). 
+-- select *
+-- from orders
+-- where returned_at is null
+
+-- 64. Show inventory items where sold_at is not null (items that have been sold). 
+-- select *
+-- from inventory_items
+-- where sold_at is not null
+
+-- 65. Find order_items where shipped_at is not null but delivered_at is null. 
+-- select *
+-- from order_items
+-- where shipped_at is not null
+--   and delivered_at is null
+
+
+-- 66. how many orders are returned (returned_at is not null). 
+-- select count(*) number_of_returnes
+-- from orders
+-- where returned_at is not null
+
+-- solve previous question without using a condition
+-- select count(returned_at) number_of_returnes
+-- from orders
+
+
+-- 67. Find inventory_items where sold_at is null (unsold inventory). 
+-- select *
+-- from inventory_items
+-- where sold_at is null
+
+-- 68. Create a column 'age_group' that shows 'Young' for users under 30, 'Middle' for 30-50, and 'Senior' for over  50. 
+-- select * ,
+--   case
+--     when age <= 30 then 'Young'
+--     when age between 30 and 50 then 'Middle'
+--     when age > 50 then 'Senior'
+--   end as age_group
+-- from users
+
+
+-- 69. Classify products as 'Budget' (retail_price < 50), 'Mid-Range' (50-150), 
+-- or 'Premium' (>150). 
+-- select *, 
+--   case
+--     when retail_price < 50 then 'Budget'
+--     when retail_price between 50 and 150 then 'Mid-Range'
+--     when retail_price > 150 then 'Premium'
+--   end as product_classification
+-- from products
+
+
+-- 70. Create a 'gender_label' column showing 'Male' for 'M', 'Female' for 'F',
+-- and 'missing' for anything else. 
+-- select *,
+--   case
+--     when gender ='M' then 'Male'
+--     when gender ='F' then 'Female'
+--     else 'missing'
+--   end as gender_label
+-- from users
+
+
+-- 71. Create a 'order_size' column to classify orders as 'Small' (1-2 items), 
+-- 'Medium' (3-5 items), or 'Large' (>5 items) based on num_of_item in orders table
+-- select *,
+--   case
+--     when num_of_item between 1 and 2 then 'Small'
+--     when num_of_item between 3 and 5 then 'Medium'
+--     when num_of_item > 5 then 'Large'
+--   end as order_size
+-- from orders
+
+
+-- 72. Create a column 'inventory_status' that is showing 'Sold' if sold_at IS NOT NULL, 
+-- otherwise 'In Stock' for inventory_items. 
+-- select *, 
+--   case 
+--     when sold_at is not null then 'Sold'
+--     else 'In Stock'
+--   end as inventory_status
+-- from inventory_items
+
+-- 73. Create a column 'event_category' to classify events as 'Conversion' if event type 
+-- is either (purchase or cart), 'Browsing' otherwise 
+
+-- select *,
+--   case
+--     when event_type ='purchase' or event_type ='cart' then 'Conversion'
+--     else 'Browsing'
+--   end as event_category
+-- from events
+
+
+-- 74. Create a 'delivery_status' showing 'Delivered' if delivered_at IS NOT NULL,
+-- 'Shipped' if shipped_at IS NOT  NULL, otherwise 'Processing' for order_items. 
+-- select *,
+--   case
+--     when delivered_at is not null then 'delivered'
+--     when shipped_at is not null then 'Shipped'
+--     else 'Processing'
+--   end as delivery_status
+-- from order_items
+
+
+-- 75. Classify inventory_items profit margin as 
+-- 'High' (product_retail_price > 2*cost), 
+-- 'Medium' (between 1.5*cost and 2xcost inclusive), 
+--  or  'Low' (<1.5x cost).
+--  call the new column as margin_category
+-- select *,
+--   case
+--     when product_retail_price > 2*cost then 'High'
+--     when product_retail_price between 1.5*cost and 2*cost then 'Medium'
+--     when product_retail_price < 1.5*cost then 'Low'
+--   end as margin_category
+-- from inventory_items
+
+
+-- 76. Count the number of products in each category. 
+
+-- select category, count(*) as number_of_cat,sum(retail_price) as total_retail_price
+-- from products
+-- group by category
+
+-- 77. Find the average age of users grouped by gender. 
+-- select gender, avg(age) as average_age
+-- from users
+-- group by gender
+
+
+-- 78. Count the number of events for each event_type. 
+-- select event_type, count(*) as total_events
+-- from events
+-- group by event_type
+
+
+-- 78-2. Count the number of events for each event_type and for each city. 
+-- order ascending by city 
+-- select city, event_type , count(*) as total_event
+-- from events
+-- group by 1, event_type
+-- order by city ,2
+
+
+-- 79. Calculate the total number of orders placed by each user_id. 
+-- select user_id,count(num_of_item) 
+-- from orders
+-- group by user_id
+
+
+-- 80-2. Find the average retail_price for products in each department for each category. 
+-- select category, department, round(avg(retail_price),2)  as average_retail
+-- from products
+-- group by 1,2
+
+-- 87-2. Find the count of each product categories that have more than 500 products
+-- select category, count(*) as product_count
+-- from products
+-- group by category
+-- having count(*) > 500
+
+-- select category, count(*) as product_count
+-- from products
+-- group by category
+-- having category in ('Plus','Swim')
+
+
+-- 88. Show users who have placed more than 2 orders. 
+-- select user_id, count(*) as count_of_products
+-- from orders
+-- group by user_id
+-- having count(*) > 2
+
+-- 90. Show traffic_source values that generated more than 100000 events. 
+-- select traffic_source,count(*)
+-- from events
+-- group by 1
+-- having count(*) > 100000
+
+
+-- 93. Find order_ids from order_items where the total sale_price is greater than 250. 
+-- select order_id, sum(sale_price) as total_sales
+-- from order_items
+-- group by order_id
+-- having sum(sale_price)> 250
+
+-- 95. The product team needs to segment event traffic. Using the Events table, calculate the total count of events categorized by Traffic_Type: 
+----- - 'Marketing' (if traffic_source is 'Adwords' or 'Email')
+----- - 'Social' (if 'YouTube' or 'Facebook')
+----- - 'Organic/Direct' for all others.
+-- select count(*) as event_total, 
+--   case
+--     when lower(traffic_source) in ('adwords','email') then 'Marketing'
+--     when lower(traffic_source) in ('youtube','facebook') then 'Social'
+--     else 'Organic/Direct'
+--   end as traffic_segments
+-- from events
+-- group by traffic_segments
+
+
+-- 96. Modify the following code to count each age_group category 
+-- SELECT *,
+-- 	CASE 
+-- 		WHEN age < 30 THEN 'Young'
+-- 		WHEN age BETWEEN 30 AND 50  THEN 'Middle' 
+-- 		ELSE 'Senior' 
+-- 		END AS age_group
+-- FROM users
+
+
+-- SELECT 
+-- 	CASE 
+-- 		WHEN age < 30 THEN 'Young'
+-- 		WHEN age BETWEEN 30 AND 50  THEN 'Middle' 
+-- 		ELSE 'Senior' 
+-- 		END AS age_group, count(*)
+-- FROM users
+-- group by age_group
+
+
+-- 97. Modify the following code to count each price category 
+-- SELECT *, 
+-- 	CASE 
+-- 		WHEN retail_price < 50 THEN 'Budget' 
+-- 		WHEN  retail_price BETWEEN 50 AND 150 THEN 'Mid-Range' 
+-- 		ELSE 'Premium' 
+-- 		END AS price_category
+-- FROM products; 
+
+
+-- SELECT  
+-- 	CASE 
+-- 		WHEN retail_price < 50 THEN 'Budget' 
+-- 		WHEN  retail_price BETWEEN 50 AND 150 THEN 'Mid-Range' 
+-- 		ELSE 'Premium' 
+-- 		END AS price_category,count(*)
+-- FROM products
+-- group by price_category
+
+
+-- 99. Modify the following code to count how many inventories are sold and how many in stock
+-- SELECT *,
+-- 	CASE
+-- 		WHEN sold_at IS NOT NULL THEN 'Sold' 
+-- 		ELSE 'In Stock'  
+-- 		END AS inventory_status
+-- FROM inventory_items
+
+
+-- SELECT 
+-- 	CASE
+-- 		WHEN sold_at IS NOT NULL THEN 'Sold' 
+-- 		ELSE 'In Stock'  
+-- 		END AS inventory_status,count(*)
+-- FROM inventory_items
+-- group by inventory_status
+
+
+
+-- 101. show all order_id with user first_name, and last_name. 
+-- select order_id, user_id , first_name, last_name
+-- from orders
+--   join users
+--     on orders.user_id = users.id
+
+-- 102. show all order item id, product name, and sale_price. 
+-- select order_items.id,name,sale_price
+-- from order_items
+--   join products
+--     on order_items.product_id= products.id
+
+
+-- 103. Join products and distribution_centers to show product name and distribution center name. 
+-- select pr.name, dc.name
+-- from products pr
+--   join distribution_centers dc
+--     on pr.distribution_center_id = dc.id
+
+
+-- 104. Join events and users to show event_type and user email for events with event_type 'purchase'. 
+-- select ev.event_type, email
+-- from users u
+--   join events ev
+--     on u.id = ev.user_id
+-- where lower(event_type) = 'purchase'
+
+
+-- 105. Join inventory_items and products to show product name, inventory cost, and product retail_price. 
+-- select pr.name, ii.cost, retail_price
+-- from products pr
+--   join inventory_items ii
+--     on pr.id = ii.product_id
+
+
+-- 106. show order_item id, product name, and distribution center name.
+-- Join order_items, products, and distribution_centers
+-- select oi.id, pr.name as product_name, dc.name as distribution_name
+-- from order_items as oi
+--   join products as pr
+--     on oi.product_id = pr.id
+--   join distribution_centers as dc
+--     on pr.distribution_center_id = dc.id
+
+
+-- 107. find products that have NO inventory records. 
+-- select p.*
+-- from products as p
+--   left join inventory_items as i
+--     on i.product_id = p.id
+-- where i.product_id is null
+
+
+-- 108. Show list of users who have not ordered anything
+-- select *
+-- from users u
+--   left join orders o
+--     on u.id = o.user_id
+-- where o.user_id is null
+
+
+
+
+
+
+
